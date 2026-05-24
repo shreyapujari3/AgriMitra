@@ -1,0 +1,14 @@
+/* Expert Help Page Styles */
+.expert-help-page {
+  padding: 2rem 1.5rem;
+}
+
+@media (max-width: 640px) {
+  .expert-help-page {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+}

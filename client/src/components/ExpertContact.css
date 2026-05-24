@@ -1,0 +1,151 @@
+/* Expert Contact Styles */
+.experts-container {
+  width: 100%;
+}
+
+.helpline-card {
+  background: linear-gradient(135deg, #1976D2 0%, #1565C0 100%);
+  color: white;
+  border-radius: 0.5rem;
+  padding: 2rem;
+  margin-bottom: 2rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.helpline-card h3 {
+  margin: 0 0 1rem 0;
+  font-size: 1.2rem;
+}
+
+.helpline-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.helpline-icon {
+  font-size: 1.5rem;
+}
+
+.helpline-number {
+  font-size: 1.5rem;
+  color: white;
+  text-decoration: none;
+  font-weight: 700;
+  transition: all 0.3s ease;
+}
+
+.helpline-number:hover {
+  transform: scale(1.05);
+  text-decoration: underline;
+}
+
+.experts-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.expert-card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border-top: 4px solid #2E7D32;
+}
+
+.expert-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.expert-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.expert-icon {
+  font-size: 2rem;
+  color: #2E7D32;
+  flex-shrink: 0;
+}
+
+.expert-header h3 {
+  margin: 0;
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.expert-designation {
+  color: #2E7D32;
+  font-weight: 600;
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+}
+
+.expert-district {
+  color: #888;
+  font-size: 0.9rem;
+  margin: 0.3rem 0 1rem 0;
+}
+
+.expert-message {
+  background: #F1F8E9;
+  padding: 1rem;
+  border-radius: 0.25rem;
+  color: #333;
+  font-size: 0.95rem;
+  margin: 1rem 0;
+  font-style: italic;
+  line-height: 1.4;
+}
+
+.btn-call {
+  display: inline-block;
+  width: 100%;
+  padding: 0.65rem 1rem;
+  background: linear-gradient(135deg, #2E7D32 0%, #1B5E20 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 0.25rem;
+  font-weight: 600;
+  text-align: center;
+  transition: all 0.3s ease;
+  cursor: pointer;
+  min-height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn-call:hover {
+  background: linear-gradient(135deg, #1B5E20 0%, #0D3620 100%);
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(46, 125, 50, 0.3);
+}
+
+.experts-loading {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+}
+
+@media (max-width: 640px) {
+  .helpline-card {
+    padding: 1.5rem;
+  }
+
+  .helpline-number {
+    font-size: 1.25rem;
+  }
+
+  .experts-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

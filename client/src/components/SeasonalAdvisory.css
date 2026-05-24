@@ -1,0 +1,68 @@
+.advisory {
+  padding: 6rem 0;
+  background: linear-gradient(180deg, #0a2e0a 0%, #071f07 100%);
+  position: relative;
+  overflow: hidden;
+}
+.advisory__blob {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(61,156,42,0.08), transparent);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  filter: blur(120px);
+  pointer-events: none;
+  animation: blobFloat 10s ease-in-out infinite;
+}
+@keyframes blobFloat {
+  0%, 100% { transform: translate(-50%,-50%) scale(1); }
+  50% { transform: translate(-50%,-50%) scale(1.1); }
+}
+.advisory__header { text-align: center; margin-bottom: 2.5rem; opacity: 0; transform: translateY(20px); transition: all 0.7s ease; }
+.advisory__header--visible { opacity: 1; transform: translateY(0); }
+.advisory__banner { border: 1px solid; border-radius: 20px; padding: 1.5rem 2rem; margin-bottom: 2rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; opacity: 0; transform: translateY(20px); transition: all 0.7s ease 0.2s; }
+.advisory__banner--visible { opacity: 1; transform: translateY(0); }
+.advisory__banner-left { display: flex; align-items: center; gap: 1.2rem; }
+.advisory__season-icon { font-size: 3rem; animation: iconPulse 3s ease-in-out infinite; }
+@keyframes iconPulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.1); } }
+.advisory__season-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; color: rgba(255,255,255,0.4); font-weight: 600; }
+.advisory__season-name { font-size: 1.6rem; font-weight: 800; font-family: 'Space Grotesk', sans-serif; line-height: 1.1; }
+.advisory__season-month { font-size: 0.82rem; color: rgba(255,255,255,0.5); margin-top: 2px; }
+.advisory__season-tabs { display: flex; gap: 6px; flex-wrap: wrap; }
+.advisory__tab { padding: 6px 14px; border-radius: 50px; border: 1px solid rgba(255,255,255,0.15); background: rgba(255,255,255,0.05); color: rgba(255,255,255,0.6); font-family: 'Poppins', sans-serif; font-size: 0.78rem; font-weight: 600; cursor: pointer; transition: all 0.3s ease; }
+.advisory__tab:hover { background: rgba(255,255,255,0.1); color: #fff; }
+.advisory__tab--active { color: #1a1a1a !important; border-color: transparent; }
+.advisory__cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.2rem; margin-bottom: 2rem; }
+.advisory__card { padding: 1.5rem; position: relative; overflow: hidden; transition: all 0.3s ease; animation: fadeInUp 0.6s ease var(--card-delay, 0s) both; }
+@keyframes fadeInUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+.advisory__card:hover { transform: translateY(-6px); border-color: var(--card-color, rgba(255,255,255,0.2)); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
+.advisory__card-top { display: flex; align-items: center; justify-content: space-between; margin-bottom: 0.75rem; }
+.advisory__card-crop { font-size: 0.9rem; font-weight: 700; color: #fff; }
+.advisory__card-risk { font-size: 0.72rem; font-weight: 700; padding: 3px 10px; border-radius: 50px; text-transform: uppercase; letter-spacing: 0.5px; }
+.advisory__card-disease { font-size: 1rem; font-weight: 700; color: #fff; margin-bottom: 0.6rem; }
+.advisory__card-tip { font-size: 0.82rem; color: rgba(255,255,255,0.55); line-height: 1.6; margin-bottom: 1rem; }
+.advisory__card-btn { display: inline-block; font-size: 0.8rem; font-weight: 600; color: #82d463; text-decoration: none; transition: all 0.3s ease; padding: 6px 0; }
+.advisory__card-btn:hover { color: #fff; }
+.advisory__calendar { padding: 2rem; opacity: 0; transform: translateY(20px); transition: all 0.7s ease 0.4s; }
+.advisory__calendar--visible { opacity: 1; transform: translateY(0); }
+.advisory__calendar-header { display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 1.5rem; }
+.advisory__calendar-header h3 { font-size: 1.1rem; font-weight: 700; color: #fff; }
+.advisory__calendar-legend { display: flex; gap: 1rem; flex-wrap: wrap; }
+.advisory__legend-item { display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: rgba(255,255,255,0.6); }
+.advisory__legend-dot { width: 10px; height: 10px; border-radius: 3px; flex-shrink: 0; }
+.advisory__cal-grid { display: grid; grid-template-columns: 120px repeat(12, 1fr); gap: 4px; margin-bottom: 4px; align-items: center; }
+.advisory__cal-month { text-align: center; font-size: 0.7rem; color: rgba(255,255,255,0.4); font-weight: 600; padding: 4px 2px; position: relative; }
+.advisory__cal-month--current { color: #fff; font-weight: 800; }
+.advisory__cal-now { display: block; font-size: 0.55rem; color: #f5c518; text-transform: uppercase; letter-spacing: 0.5px; margin-top: 1px; }
+.advisory__cal-label { font-size: 0.8rem; font-weight: 600; padding-right: 0.5rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.advisory__cal-cell { height: 28px; border-radius: 4px; transition: all 0.3s ease; cursor: default; }
+.advisory__cal-cell:hover { transform: scaleY(1.2); filter: brightness(1.2); }
+.advisory__cal-cell--current { outline: 2px solid rgba(255,255,255,0.5); outline-offset: 1px; }
+@media (max-width: 768px) {
+  .advisory { padding: 4rem 0; }
+  .advisory__cal-grid { grid-template-columns: 80px repeat(12, 1fr); gap: 2px; }
+  .advisory__cal-label { font-size: 0.65rem; }
+  .advisory__cal-month { font-size: 0.6rem; }
+  .advisory__cal-cell { height: 20px; }
+}

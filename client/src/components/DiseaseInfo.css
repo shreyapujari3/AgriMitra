@@ -1,0 +1,171 @@
+.dinfo {
+  padding: 6rem 0;
+  background: linear-gradient(180deg, #071f07 0%, #0a2e0a 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+.dinfo__blob {
+  position: absolute;
+  width: 700px; height: 700px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(61,156,42,0.08), transparent);
+  top: 50%; left: 50%;
+  transform: translate(-50%,-50%);
+  filter: blur(120px);
+  pointer-events: none;
+}
+
+.dinfo__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.5rem;
+}
+
+.dinfo__card-wrapper {
+  perspective: 1000px;
+  height: 420px;
+  cursor: pointer;
+}
+
+.dinfo__card {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transition: transform 0.7s cubic-bezier(0.4,0,0.2,1);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.dinfo__card--front {
+  transform: rotateY(0deg);
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.dinfo__card--back {
+  transform: rotateY(180deg);
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  border-top: 3px solid var(--card-color, #3d9c2a);
+}
+
+.dinfo__card-wrapper--flipped .dinfo__card--front {
+  transform: rotateY(-180deg);
+}
+
+.dinfo__card-wrapper--flipped .dinfo__card--back {
+  transform: rotateY(0deg);
+}
+
+/* Front card */
+.dinfo__card-img {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+
+.dinfo__card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.dinfo__card-wrapper:hover .dinfo__card-img img {
+  transform: scale(1.05);
+}
+
+.dinfo__card-overlay {
+  position: absolute;
+  inset: 0;
+}
+
+.dinfo__severity {
+  position: absolute;
+  top: 12px; right: 12px;
+  padding: 4px 12px;
+  border-radius: 50px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: white;
+}
+
+.dinfo__card-body {
+  padding: 1.2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.dinfo__card-icon {
+  font-size: 1.5rem;
+}
+
+.dinfo__card-name {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+}
+
+.dinfo__card-cause {
+  font-size: 0.8rem;
+  color: rgba(255,255,255,0.5);
+}
+
+.dinfo__flip-hint {
+  margin-top: auto;
+  font-size: 0.78rem;
+  color: rgba(255,255,255,0.35);
+  font-style: italic;
+}
+
+/* Back card */
+.dinfo__back-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #fff;
+  padding-bottom: 0.75rem;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+
+.dinfo__back-section h4 {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #82d463;
+  margin-bottom: 0.4rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.dinfo__back-section ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.dinfo__back-section ul li {
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.65);
+  padding-left: 1rem;
+  position: relative;
+  line-height: 1.5;
+}
+
+.dinfo__back-section ul li::before {
+  content: 'â€¢';
+  position: absolute;
+  left: 0;
+  color: var(--card-color, #3d9c2a);
+}
+
+@media (max-width: 768px) {
+  .dinfo { padding: 4rem 0; }
+  .dinfo__grid { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+  .dinfo__card-wrapper { height: 440px; }
+}

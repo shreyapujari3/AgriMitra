@@ -1,0 +1,70 @@
+/* Nearby Stores Styles */
+.stores-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+}
+
+.store-card {
+  background: white;
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  border-left: 4px solid #81C784;
+}
+
+.store-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.15);
+}
+
+.store-card h3 {
+  color: #2E7D32;
+  margin: 0 0 1rem 0;
+  font-size: 1.1rem;
+}
+
+.store-detail {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.75rem;
+  margin-bottom: 0.75rem;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.detail-icon {
+  color: #2E7D32;
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+  font-size: 1.1rem;
+}
+
+.phone-link {
+  color: #1976D2;
+  text-decoration: none;
+  font-weight: 600;
+  transition: color 0.3s ease;
+}
+
+.phone-link:hover {
+  color: #1565C0;
+  text-decoration: underline;
+}
+
+.stores-loading,
+.stores-empty {
+  text-align: center;
+  padding: 2rem;
+  color: #666;
+  font-size: 1rem;
+}
+
+@media (max-width: 640px) {
+  .stores-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}

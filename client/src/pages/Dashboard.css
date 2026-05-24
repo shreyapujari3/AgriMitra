@@ -1,0 +1,44 @@
+/* Dashboard Page Styles */
+.dashboard-page {
+  padding: 2rem 1.5rem;
+}
+
+.dashboard-container {
+  background: white;
+  padding: 2rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tips-section {
+  margin-top: 2rem;
+}
+
+.tips-section h2 {
+  color: #2E7D32;
+  font-size: 1.3rem;
+  margin-bottom: 1.5rem;
+  font-weight: 600;
+}
+
+.placeholder-text {
+  text-align: center;
+  color: #888;
+  font-size: 1.05rem;
+  padding: 2rem;
+  margin: 2rem 0 0 0;
+}
+
+@media (max-width: 640px) {
+  .dashboard-page {
+    padding: 1rem;
+  }
+
+  .page-title {
+    font-size: 1.5rem;
+  }
+
+  .dashboard-container {
+    padding: 1.5rem;
+  }
+}

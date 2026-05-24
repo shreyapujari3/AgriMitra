@@ -1,0 +1,16 @@
+{
+  "name": "agrimitra",
+  "private": true,
+  "scripts": {
+    "dev": "npm install && npm run dev:server & npm run dev:client",
+    "dev:server": "cd server && npm install && npm run dev",
+    "dev:client": "cd client && npm install && npm run dev",
+    "build": "npm run build:client && npm run build:server",
+    "build:client": "cd client && npm install && npm run build",
+    "build:server": "cd server && npm install",
+    "start": "cd server && npm start"
+  },
+  "keywords": ["agriculture", "pest-detection", "disease-advisory", "farmers"],
+  "author": "AgriMitra Team",
+  "license": "MIT"
+}

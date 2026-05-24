@@ -1,0 +1,15 @@
+import React from 'react';
+import { useLanguage } from '../context/LanguageContext.jsx';
+import './App.css';
+
+const App = () => {
+  const { translations: t } = useLanguage();
+
+  return (
+    <div className="app-main">
+      {/* Navbar is rendered from main App component */}
+    </div>
+  );
+};
+
+export default App;

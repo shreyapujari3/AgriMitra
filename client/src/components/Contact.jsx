@@ -3,7 +3,7 @@ import { useLanguage } from '../context/LanguageContext';
 import './Contact.css';
 
 export default function Contact() {
-  const { translations: t } = useLanguage();
+  const { translations: t, language } = useLanguage();
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
 
@@ -26,7 +26,7 @@ export default function Contact() {
       <div className="contact__blob" />
       <div className="container">
         <h2 className="section-title">{t.experts.title}</h2>
-        <p className="section-subtitle">{t.experts.message}</p>
+        <p className="section-subtitle">{language === 'hi' ? 'व्यक्तिगत फसल मार्गदर्शन के लिए हमारे कृषि विशेषज्ञों से जुड़ें' : language === 'kn' ? 'ವೈಯಕ್ತಿಕ ಬೆಳೆ ಮಾರ್ಗದರ್ಶನಕ್ಕಾಗಿ ನಮ್ಮ ಕೃಷಿ ತಜ್ಞರನ್ನು ಸಂಪರ್ಕಿಸಿ' : 'Connect with our agricultural specialists for personalized crop guidance.'}</p>
         <div className="contact__team">
           {team.map((member) => (
             <div key={member.name} className="contact__member glass" style={{ '--member-color': member.color }}>
@@ -48,9 +48,9 @@ export default function Contact() {
         <div className="contact__form-wrapper">
           <div className="contact__form glass">
             <div className="contact__form-header">
-              <h3>{t.common.save} Message</h3>
+              <h3>{language === 'hi' ? 'संदेश भेजें' : language === 'kn' ? 'ಸಂದೇಶ ಕಳುಹಿಸಿ' : 'Send Us a Message'}</h3>
             </div>
-            {sent && <div className="contact__success">✅ {t.common.success}</div>}
+            {sent && <div className="contact__success">✅ {language === 'hi' ? 'संदेश भेजा गया!' : language === 'kn' ? 'ಸಂದೇಶ ಕಳುಹಿಸಲಾಗಿದೆ!' : 'Message sent!'}</div>}
             <form onSubmit={handleSubmit} className="contact__form-body">
               <div className="contact__field-row">
                 <div className="contact__field">
@@ -59,18 +59,18 @@ export default function Contact() {
                     onChange={(e) => setForm({ ...form, name: e.target.value })} required />
                 </div>
                 <div className="contact__field">
-                  <label>Email</label>
+                  <label>{language === 'hi' ? 'ईमेल' : language === 'kn' ? 'ಇಮೇಲ್' : 'Email'}</label>
                   <input type="email" placeholder="farmer@email.com" value={form.email}
                     onChange={(e) => setForm({ ...form, email: e.target.value })} required />
                 </div>
               </div>
               <div className="contact__field">
-                <label>Message</label>
+                <label>{language === 'hi' ? 'संदेश' : language === 'kn' ? 'ಸಂದೇಶ' : 'Message'}</label>
                 <textarea rows={5} value={form.message}
                   onChange={(e) => setForm({ ...form, message: e.target.value })} required />
               </div>
               <button type="submit" className="btn-glow" style={{ width: '100%', justifyContent: 'center' }}>
-                🌱 {t.home.cta}
+                🌱 {language === 'hi' ? 'संदेश भेजें' : language === 'kn' ? 'ಸಂದೇಶ ಕಳುಹಿಸಿ' : 'Send Message'}
               </button>
             </form>
           </div>
@@ -78,7 +78,7 @@ export default function Contact() {
         <div className="contact__footer">
           <div className="contact__footer-brand">
             <span className="contact__footer-logo">🌿 AgriMitra</span>
-            <p>{t.home.subtitle}</p>
+            <p>{language === 'hi' ? 'भारतीय किसानों के लिए AI-संचालित फसल रोग पहचान' : language === 'kn' ? 'ಭಾರತೀಯ ರೈತರಿಗಾಗಿ AI-ಚಾಲಿತ ಬೆಳೆ ರೋಗ ಪತ್ತೆ' : 'AI-powered crop disease detection for Indian farmers'}</p>
           </div>
           <div className="contact__footer-copy">© 2025 AgriMitra</div>
         </div>

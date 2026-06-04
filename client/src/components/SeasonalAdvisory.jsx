@@ -33,20 +33,22 @@ const getAdvisoryData = (language) => ({
     {crop:'🥥 ' + (language==='hi'?'सुपारी':language==='kn'?'ಬೆಟ್ಟಲೆ':'Areca Nut'), disease:language==='hi'?'जड़ मुरझान':language==='kn'?'ಬೇರಿನ ಶೀರ್ಣತೆ':'Root Wilt', risk:language==='hi'?'कम':language==='kn'?'ಕಡಿಮೆ':'Low', tip:language==='hi'?'छाया के पेड़ों के साथ लगाएं। मिट्टी की नमी बनाए रखने के लिए जैविक मल्च लगाएं।':language==='kn'?'ಛಾಯೆ ಮರಗಳೊಂದಿಗೆ ನೆಡಿ. ಮಣ್ಣಿನ ತೇವ ಉಳಿಸಲು ಸಾವಯವ ಮಲ್ಚ್ ಹಾಕಿ.':'Plant with shade trees. Apply organic mulch to retain soil moisture.',color:'#27ae60'},
   ],
 });
-const cropCalendar = [
-  {crop:'☕ Coffee',color:'#8B4513',schedule:[0,0,1,1,1,2,2,2,1,1,0,0]},
-  {crop:'🌶️ Pepper',color:'#e74c3c',schedule:[0,0,1,1,2,2,2,2,1,1,0,0]},
-  {crop:'🎋 Sugarcane',color:'#f5c518',schedule:[1,1,1,2,2,1,1,1,1,0,0,1]},
-  {crop:'🥥 Areca Nut',color:'#8e44ad',schedule:[0,0,1,1,1,2,2,2,1,1,1,0]},
+const getCropCalendar = (language) => [
+  {crop:'☕ ' + (language==='hi'?'कॉफी':language==='kn'?'ಕಾಫಿ':'Coffee'),color:'#8B4513',schedule:[0,0,1,1,1,2,2,2,1,1,0,0]},
+  {crop:'🌶️ ' + (language==='hi'?'मिर्च':language==='kn'?'ಮೆಣ್ಸು':'Pepper'),color:'#e74c3c',schedule:[0,0,1,1,2,2,2,2,1,1,0,0]},
+  {crop:'🎋 ' + (language==='hi'?'गन्ना':language==='kn'?'ಕಬ್ಬು':'Sugarcane'),color:'#f5c518',schedule:[1,1,1,2,2,1,1,1,1,0,0,1]},
+  {crop:'🥥 ' + (language==='hi'?'सुपारी':language==='kn'?'ಬೆಟ್ಟಲೆ':'Areca Nut'),color:'#8e44ad',schedule:[0,0,1,1,1,2,2,2,1,1,1,0]},
 ];
 const riskColors = ['#27ae60','#f39c12','#e74c3c'];
-const riskLabels = ['Low','Medium','High'];
+const getRiskLabels = (language) => language === 'hi' ? ['कम','मध्यम','उच्च'] : language === 'kn' ? ['ಕಡಿಮೆ','ಮಧ್ಯಮ','ಹೆಚ್ಚು'] : ['Low','Medium','High'];
 
 export default function SeasonalAdvisory() {
   const { language } = useLanguage();
   const currentSeason = seasonByMonth[currentMonth];
   const [activeSeason, setActiveSeason] = useState(currentSeason);
   const advisoryData = getAdvisoryData(language);
+  const cropCalendar = getCropCalendar(language);
+  const riskLabels = getRiskLabels(language);
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
@@ -79,7 +81,7 @@ export default function SeasonalAdvisory() {
             <span className="advisory__season-icon">{seasonIcons[activeSeason]}</span>
             <div>
               <div className="advisory__season-label">{language === 'hi' ? 'वर्तमान मौसम' : language === 'kn' ? 'ಪ್ರಸ್ತುತ ಋತು' : 'Current Season'}</div>
-              <div className="advisory__season-name" style={{color:seasonColor.bg}}>{activeSeason} Season</div>
+              <div className="advisory__season-name" style={{color:seasonColor.bg}}>{language === 'hi' ? {'Pre-Monsoon':'मानसून पूर्व','Monsoon':'मानसून','Post-Monsoon':'मानसून पश्चात','Summer':'गर्मी'}[activeSeason] : language === 'kn' ? {'Pre-Monsoon':'ಮಾನ್ಸೂನ್ ಪೂರ್ವ','Monsoon':'ಮಾನ್ಸೂನ್','Post-Monsoon':'ಮಾನ್ಸೂನ್ ನಂತರ','Summer':'ಬೇಸಿಗೆ'}[activeSeason] : activeSeason + ' Season'}</div>
               <div className="advisory__season-month">{months[currentMonth]} — {language === 'hi' ? 'आपकी फसलों के लिए सक्रिय सलाह' : language === 'kn' ? 'ನಿಮ್ಮ ಬೆಳೆಗಳಿಗೆ ಸಕ್ರಿಯ ಸಲಹೆ' : 'Active advisory for your crops'}</div>
             </div>
           </div>
@@ -91,7 +93,7 @@ export default function SeasonalAdvisory() {
                 style={activeSeason === season ? {background:seasonColors[season].bg,color:seasonColors[season].text} : {}}
                 onClick={() => setActiveSeason(season)}
               >
-                {seasonIcons[season]} {season}
+                {seasonIcons[season]} {language === 'hi' ? {'Pre-Monsoon':'मानसून पूर्व','Monsoon':'मानसून','Post-Monsoon':'मानसून पश्चात','Summer':'गर्मी'}[season] : language === 'kn' ? {'Pre-Monsoon':'ಮಾನ್ಸೂನ್ ಪೂರ್ವ','Monsoon':'ಮಾನ್ಸೂನ್','Post-Monsoon':'ಮಾನ್ಸೂನ್ ನಂತರ','Summer':'ಬೇಸಿಗೆ'}[season] : season}
               </button>
             ))}
           </div>
@@ -108,7 +110,7 @@ export default function SeasonalAdvisory() {
               </div>
               <h4 className="advisory__card-disease">⚠️ {item.disease}</h4>
               <p className="advisory__card-tip">💡 {item.tip}</p>
-              <a href="#detect" className="advisory__card-btn">Detect Now →</a>
+              <a href="#detect" className="advisory__card-btn">{language === 'hi' ? 'अभी पता लगाएं →' : language === 'kn' ? 'ಈಗ ಪತ್ತೆ ಮಾಡಿ →' : 'Detect Now →'}</a>
             </div>
           ))}
         </div>
@@ -120,7 +122,7 @@ export default function SeasonalAdvisory() {
               {riskLabels.map((label, i) => (
                 <span key={label} className="advisory__legend-item">
                   <span className="advisory__legend-dot" style={{background:riskColors[i]}} />
-                  {label} Risk
+                  {label} {language === 'hi' ? 'जोखिम' : language === 'kn' ? 'ಅಪಾಯ' : 'Risk'}
                 </span>
               ))}
             </div>

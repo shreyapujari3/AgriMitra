@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useLanguage } from '../context/LanguageContext.jsx';
 import './Home.css';
 
 function FloatingParticle({ style }) {
@@ -6,6 +7,7 @@ function FloatingParticle({ style }) {
 }
 
 export default function Home() {
+  const { language } = useLanguage();
   const particlesRef = useRef([]);
 
   const particles = Array.from({ length: 20 }, (_, i) => ({
@@ -23,19 +25,66 @@ export default function Home() {
 
   const floatingIcons = ['🌱', '🍃', '🌿', '🌾', '🍀', '🌻', '🥬', '🫛'];
 
+  const content = {
+    en: {
+      badge: 'AI-Powered Crop Disease Detection',
+      sub: 'Smart Farming,',
+      accent: 'Healthier Crops',
+      desc: 'Upload a photo of your crop and get instant AI-powered disease detection, treatment recommendations, and expert guidance — in your language.',
+      detect: 'Detect Disease',
+      howItWorks: 'How It Works',
+      scroll: 'Scroll to explore',
+      stats: [
+        { value: '95%', label: 'Detection Accuracy' },
+        { value: '12+', label: 'Diseases Covered' },
+        { value: '3s', label: 'Analysis Time' },
+        { value: '4', label: 'Crop Types' },
+      ],
+    },
+    hi: {
+      badge: 'AI-संचालित फसल रोग पहचान',
+      sub: 'स्मार्ट खेती,',
+      accent: 'स्वस्थ फसलें',
+      desc: 'अपनी फसल की फोटो अपलोड करें और तुरंत AI-संचालित रोग पहचान, उपचार सिफारिशें और विशेषज्ञ मार्गदर्शन पाएं — अपनी भाषा में।',
+      detect: 'रोग पहचानें',
+      howItWorks: 'यह कैसे काम करता है',
+      scroll: 'नीचे स्क्रॉल करें',
+      stats: [
+        { value: '95%', label: 'पहचान सटीकता' },
+        { value: '12+', label: 'रोग शामिल' },
+        { value: '3s', label: 'विश्लेषण समय' },
+        { value: '4', label: 'फसल प्रकार' },
+      ],
+    },
+    kn: {
+      badge: 'AI-ಚಾಲಿತ ಬೆಳೆ ರೋಗ ಪತ್ತೆ',
+      sub: 'ಸ್ಮಾರ್ಟ್ ಕೃಷಿ,',
+      accent: 'ಆರೋಗ್ಯಕರ ಬೆಳೆಗಳು',
+      desc: 'ನಿಮ್ಮ ಬೆಳೆಯ ಫೋಟೋ ಅಪ್ಲೋಡ್ ಮಾಡಿ ಮತ್ತು ತಕ್ಷಣ AI-ಚಾಲಿತ ರೋಗ ಪತ್ತೆ, ಚಿಕಿತ್ಸೆ ಶಿಫಾರಸುಗಳು ಮತ್ತು ತಜ್ಞ ಮಾರ್ಗದರ್ಶನ ಪಡೆಯಿರಿ — ನಿಮ್ಮ ಭಾಷೆಯಲ್ಲಿ.',
+      detect: 'ರೋಗ ಪತ್ತೆ ಮಾಡಿ',
+      howItWorks: 'ಇದು ಹೇಗೆ ಕೆಲಸ ಮಾಡುತ್ತದೆ',
+      scroll: 'ಕೆಳಗೆ ಸ್ಕ್ರಾಲ್ ಮಾಡಿ',
+      stats: [
+        { value: '95%', label: 'ಪತ್ತೆ ನಿಖರತೆ' },
+        { value: '12+', label: 'ರೋಗಗಳು ಒಳಗೊಂಡಿವೆ' },
+        { value: '3s', label: 'ವಿಶ್ಲೇಷಣೆ ಸಮಯ' },
+        { value: '4', label: 'ಬೆಳೆ ವಿಧಗಳು' },
+      ],
+    },
+  };
+
+  const c = content[language] || content.en;
+
   return (
     <section id="home" className="hero">
-      {/* Animated blobs */}
       <div className="hero__blob hero__blob--1" />
       <div className="hero__blob hero__blob--2" />
       <div className="hero__blob hero__blob--3" />
 
-      {/* Particles */}
       {particles.map((p) => (
         <FloatingParticle key={p.id} style={p.style} />
       ))}
 
-      {/* Floating icons */}
       {floatingIcons.map((icon, i) => (
         <div
           key={i}
@@ -51,44 +100,33 @@ export default function Home() {
         </div>
       ))}
 
-      {/* Grid overlay */}
       <div className="hero__grid" />
 
       <div className="hero__content">
         <div className="hero__badge animate-fadeInUp">
           <span className="hero__badge-dot" />
-          AI-Powered Crop Disease Detection
+          {c.badge}
         </div>
-
         <h1 className="hero__title animate-fadeInUp" style={{ animationDelay: '0.2s' }}>
           <span className="hero__title-main">AgriMitra</span>
           <br />
-          <span className="hero__title-sub">Smart Farming,</span>
+          <span className="hero__title-sub">{c.sub}</span>
           <br />
-          <span className="hero__title-accent">Healthier Crops</span>
+          <span className="hero__title-accent">{c.accent}</span>
         </h1>
-
         <p className="hero__description animate-fadeInUp" style={{ animationDelay: '0.4s' }}>
-          Upload a photo of your crop and get instant AI-powered disease detection,
-          treatment recommendations, and expert guidance — in your language.
+          {c.desc}
         </p>
-
         <div className="hero__actions animate-fadeInUp" style={{ animationDelay: '0.6s' }}>
           <a href="#detect" className="btn-glow">
-            <span>🔬</span> Detect Disease
+            <span>🔬</span> {c.detect}
           </a>
           <a href="#how-it-works" className="btn-outline">
-            <span>▶</span> How It Works
+            <span>▶</span> {c.howItWorks}
           </a>
         </div>
-
         <div className="hero__stats animate-fadeInUp" style={{ animationDelay: '0.8s' }}>
-          {[
-            { value: '95%', label: 'Detection Accuracy' },
-            { value: '12+', label: 'Diseases Covered' },
-            { value: '3s', label: 'Analysis Time' },
-            { value: '4', label: 'Crop Types' },
-          ].map((stat) => (
+          {c.stats.map((stat) => (
             <div key={stat.label} className="hero__stat glass">
               <span className="hero__stat-value">{stat.value}</span>
               <span className="hero__stat-label">{stat.label}</span>
@@ -97,12 +135,11 @@ export default function Home() {
         </div>
       </div>
 
-      {/* Scroll indicator */}
       <div className="hero__scroll">
         <div className="hero__scroll-mouse">
           <div className="hero__scroll-wheel" />
         </div>
-        <span>Scroll to explore</span>
+        <span>{c.scroll}</span>
       </div>
     </section>
   );

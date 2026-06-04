@@ -4,7 +4,27 @@ import { FiCheckCircle, FiAlertCircle } from 'react-icons/fi';
 import './DetectionResult.css';
 
 const DetectionResult = ({ result, loading = false }) => {
-  const { translations: t } = useLanguage();
+  const { translations: t, language } = useLanguage();
+
+  const diseaseTranslations = {
+    'Leaf Rust': { hi: 'पत्ती में जंग', kn: 'ಎಲೆ ತುಪ್ಪ' },
+    'Berry Disease': { hi: 'बेरी रोग', kn: 'ಬೆರಿ ರೋಗ' },
+    'Root Rot': { hi: 'जड़ सड़न', kn: 'ಬೇರಿನ ಕೆಣೆ' },
+    'Leaf Spot': { hi: 'पत्ती धब्बा', kn: 'ಎಲೆ ಲೋಪ' },
+    'Anthracnose': { hi: 'एन्थ्रेक्नोज', kn: 'ಅಂತ್ರಾಕ್ನೋಸ್' },
+    'Phytophthora Blight': { hi: 'फाइटोफ्थोरा झुलसा', kn: 'ಫೈಟೋಫ್ಥೋರಾ ಸುಟ್ಟುಹೋಗುವಿಕೆ' },
+    'Red Rot': { hi: 'लाल सड़न', kn: 'ಕೆಂಪು ಕೆಣೆ' },
+    'Wilt Disease': { hi: 'मुरझान रोग', kn: 'ಶೀರ್ಣ ರೋಗ' },
+    'Smut Disease': { hi: 'कालिख रोग', kn: 'ಕಾಲುಷ್ಠ ರೋಗ' },
+    'Root Wilt': { hi: 'जड़ मुरझान', kn: 'ಬೇರಿನ ಶೀರ್ಣತೆ' },
+    'Yellow Leaf Disease': { hi: 'पीली पत्ती रोग', kn: 'ಹೀಗೆ ಎಲೆ ರೋಗ' },
+  };
+
+  const getDiseaseName = (name) => {
+    if (language === 'hi' && diseaseTranslations[name]?.hi) return diseaseTranslations[name].hi;
+    if (language === 'kn' && diseaseTranslations[name]?.kn) return diseaseTranslations[name].kn;
+    return name;
+  };
 
   if (loading) {
     return (
@@ -51,7 +71,7 @@ const DetectionResult = ({ result, loading = false }) => {
       <div className="result-content">
         <div className="result-item">
           <label>{t.results.diseaseDetected}:</label>
-          <p className="disease-name">{result.disease}</p>
+          <p className="disease-name">{getDiseaseName(result.disease)}</p>
         </div>
 
         <div className="result-item">

@@ -3,7 +3,13 @@ import { useLanguage } from '../context/LanguageContext.jsx';
 import './CropSelector.css';
 
 const CropSelector = ({ crops, selectedCrop, onSelectCrop, disabled = false }) => {
-  const { translations: t } = useLanguage();
+const { language, translations: t } = useLanguage();
+
+const getCropName = (crop) => {
+  if (language === 'hi' && crop.local_name_hi) return crop.local_name_hi;
+  if (language === 'kn' && crop.local_name_kn) return crop.local_name_kn;
+  return crop.name;
+};
 
   return (
     <div className="crop-selector">
@@ -20,7 +26,7 @@ const CropSelector = ({ crops, selectedCrop, onSelectCrop, disabled = false }) =
         <option value="">-- {t.detection.selectCrop} --</option>
         {crops && crops.map((crop) => (
           <option key={crop.id} value={crop.id}>
-            {crop.name}
+            {getCropName(crop)}
           </option>
         ))}
       </select>

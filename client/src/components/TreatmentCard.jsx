@@ -10,7 +10,6 @@ const TreatmentCard = ({ treatment }) => {
     return null;
   }
 
-  // Get text based on language
   const getFieldValue = (field) => {
     if (language === 'hi' && treatment[field + '_hi']) {
       return treatment[field + '_hi'];
@@ -24,32 +23,28 @@ const TreatmentCard = ({ treatment }) => {
   return (
     <div className="treatment-card">
       <h3>{t.treatment.title}</h3>
-      
       <div className="treatment-content">
         <div className="treatment-item">
           <FiFeather className="treatment-icon pesticide" />
           <div>
             <label>{t.treatment.pesticide}</label>
-            <p>{treatment.pesticide_name || 'N/A'}</p>
+            <p>{getFieldValue('pesticide_name') || 'N/A'}</p>
           </div>
         </div>
-
         <div className="treatment-item">
           <FiSun className="treatment-icon organic" />
           <div>
             <label>{t.treatment.organic}</label>
-            <p>{treatment.organic_option || 'N/A'}</p>
+            <p>{getFieldValue('organic_option') || 'N/A'}</p>
           </div>
         </div>
-
         <div className="treatment-item">
           <FiTrendingDown className="treatment-icon dosage" />
           <div>
             <label>{t.treatment.dosage}</label>
-            <p>{treatment.dosage || 'N/A'}</p>
+            <p>{getFieldValue('dosage') || 'N/A'}</p>
           </div>
         </div>
-
         <div className="treatment-item">
           <FiDroplet className="treatment-icon method" />
           <div>
@@ -57,29 +52,27 @@ const TreatmentCard = ({ treatment }) => {
             <p>{getFieldValue('method') || 'N/A'}</p>
           </div>
         </div>
-
         <div className="treatment-item">
           <FiClock className="treatment-icon frequency" />
           <div>
             <label>{t.treatment.frequency}</label>
-            <p>{treatment.frequency || 'N/A'}</p>
+            <p>{getFieldValue('frequency') || 'N/A'}</p>
           </div>
         </div>
       </div>
-
       <div className="treatment-actions">
-      <button className="btn-apply" onClick={() => {
-        document.getElementById('contact') && document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
-        alert('Treatment plan noted! Contact an expert or visit a nearby store for supplies.');
-      }}>
-        {t.treatment.apply} ✓
-      </button>
-      <button className="btn-apply" style={{ background: 'linear-gradient(135deg, #1976D2, #0D47A1)', marginTop: '0.5rem' }} onClick={() => {
-        window.print();
-      }}>
-        🖨️ Print Treatment Plan
-      </button>
-    </div>
+        <button className="btn-apply" onClick={() => {
+          document.getElementById('contact') && document.getElementById('contact').scrollIntoView({ behavior: 'smooth' });
+          alert('Treatment plan noted! Contact an expert or visit a nearby store for supplies.');
+        }}>
+          {t.treatment.apply} ✓
+        </button>
+        <button className="btn-apply" style={{ background: 'linear-gradient(135deg, #1976D2, #0D47A1)', marginTop: '0.5rem' }} onClick={() => {
+          window.print();
+        }}>
+          🖨️ Print Treatment Plan
+        </button>
+      </div>
     </div>
   );
 };

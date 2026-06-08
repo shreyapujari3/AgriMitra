@@ -4,12 +4,13 @@ import CropSelector from '../components/CropSelector.jsx';
 import ImageUploader from '../components/ImageUploader.jsx';
 import DetectionResult from '../components/DetectionResult.jsx';
 import TreatmentCard from '../components/TreatmentCard.jsx';
-import { getCrops, detectDisease } from '../utils/api.js';
+import { getCrops, detectDisease, getStores } from '../utils/api.js';
 import toast from 'react-hot-toast';
+import NearbyStores from '../components/NearbyStores.jsx';
 import './DetectDisease.css';
 
 const DetectDisease = () => {
-  const { translations: t } = useLanguage();
+  const { translations: t, language } = useLanguage();
   const [crops, setCrops] = useState([]);
   const [selectedCropId, setSelectedCropId] = useState(null);
   const [selectedCropName, setSelectedCropName] = useState('');
@@ -17,11 +18,26 @@ const DetectDisease = () => {
   const [result, setResult] = useState(null);
   const [loading, setLoading] = useState(false);
   const [cropsLoading, setCropsLoading] = useState(true);
+  const [stores, setStores] = useState([]);
+  const [storesLoading, setStoresLoading] = useState(false);
 
   // Load crops on mount
   useEffect(() => {
     loadCrops();
+    loadStores();
   }, []);
+
+  const loadStores = async () => {
+    try {
+      setStoresLoading(true);
+      const storeData = await getStores();
+      setStores(storeData);
+    } catch (e) {
+      console.error('Failed to load stores:', e);
+    } finally {
+      setStoresLoading(false);
+    }
+  };
 
   const loadCrops = async () => {
     try {
@@ -68,6 +84,16 @@ const DetectDisease = () => {
       );
       setResult(detectionResult);
       toast.success('Disease detected successfully!');
+      // Load nearby stores after detection
+      try {
+        setStoresLoading(true);
+        const storeData = await getStores();
+        setStores(storeData);
+      } catch (e) {
+        console.error(e);
+      } finally {
+        setStoresLoading(false);
+      }
     } catch (error) {
       toast.error(error.error || 'Detection failed. Please try again.');
       console.error(error);
@@ -125,6 +151,15 @@ const DetectDisease = () => {
             >
               🔄 Detect Another Disease
             </button>
+            <div className="nearby-stores-section">
+              <h2 style={{ marginTop: '2rem', color: '#2E7D32', fontSize: '1.3rem' }}>
+                🏪 {language === 'hi' ? 'नजदीकी कृषि दुकानें' : language === 'kn' ? 'ಹತ್ತಿರದ ಕೃಷಿ ಅಂಗಡಿಗಳು' : 'Nearby Agri Stores'}
+              </h2>
+              <p style={{ color: '#666', fontSize: '0.9rem', marginBottom: '1rem' }}>
+                {language === 'hi' ? 'इन दुकानों से कीटनाशक और उपचार सामग्री खरीदें' : language === 'kn' ? 'ಈ ಅಂಗಡಿಗಳಿಂದ ಕ್ರಿಮಿನಾಶಕ ಮತ್ತು ಚಿಕಿತ್ಸೆ ಸಾಮಗ್ರಿ ಖರೀದಿಸಿ' : 'Buy pesticides and treatment supplies from these stores'}
+              </p>
+              <NearbyStores stores={stores} loading={storesLoading} />
+            </div>
           </div>
         )}
 

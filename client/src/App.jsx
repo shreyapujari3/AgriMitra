@@ -11,6 +11,7 @@ import DiseaseInfo from './components/DiseaseInfo';
 import SeasonalAdvisory from './components/SeasonalAdvisory';
 import Contact from './components/Contact';
 import NearbyStoresSection from './components/NearbyStoresSection';
+import NearbyStoresSection from './components/NearbyStoresSection';
 import Login from './pages/Login';
 
 export default function App() {

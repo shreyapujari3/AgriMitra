@@ -74,16 +74,7 @@ const DetectionResult = ({ result, loading = false }) => {
           <p className="disease-name">{getDiseaseName(result.disease)}</p>
         </div>
 
-        <div className="result-item">
-          <label>{t.results.confidence}:</label>
-          <div className="confidence-bar">
-            <div
-              className="confidence-fill"
-              style={{ width: `${result.confidence}%` }}
-            ></div>
-          </div>
-          <p className="confidence-text">{result.confidence}%</p>
-        </div>
+
 
         <div className="result-item">
           <label>{t.results.severity}:</label>
